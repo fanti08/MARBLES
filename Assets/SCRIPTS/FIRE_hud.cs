@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class FIRE_hud : MonoBehaviour
 {
-    int mode;
-    int power;
+    int mode = 1;
+    float power = 3.8f;
 
     private void Update()
     {
@@ -48,7 +48,7 @@ public class FIRE_hud : MonoBehaviour
             mode = 5;
             sel_1.localPosition = new Vector3(-310, 116, 0);
         }
-        if (Input.GetKeyDown(KeyCode.Question))
+        if (Input.GetKeyDown(KeyCode.M))
         {
             mode = 6;
             sel_1.localPosition = new Vector3(-310, 93, 0);
@@ -57,53 +57,53 @@ public class FIRE_hud : MonoBehaviour
         //strenght
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            power = 1;
+            power = 3.8f;
             sel_2.localPosition = new Vector3(-212, 160, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            power = 2;
+            power = 4f;
             sel_2.localPosition = new Vector3(-190, 160, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            power = 3;
+            power = 4.2f;
             sel_2.localPosition = new Vector3(-168, 160, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            power = 4;
+            power = 4.6f;
             sel_2.localPosition = new Vector3(-212, 137.5f, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            power = 5;
+            power = 4.8f;
             sel_2.localPosition = new Vector3(-190, 137.5f, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            power = 6;
+            power = 5f;
             sel_2.localPosition = new Vector3(-168, 137.5f, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha7))
         {
-            power = 7;
+            power = 5.2f;
             sel_2.localPosition = new Vector3(-212, 115, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha8))
         {
-            power = 8;
+            power = 5.4f;
             sel_2.localPosition = new Vector3(-190, 115, 0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha9))
         {
-            power = 9;
+            power = 5.6f;
             sel_2.localPosition = new Vector3(-168, 115, 0);
         }
 
         //direction
-        int X = -Mathf.RoundToInt(Camera.X);
-        int Y = Mathf.RoundToInt(Camera.Y) + 90;
+        int X = -Mathf.RoundToInt(_Camera.X);
+        int Y = Mathf.RoundToInt(_Camera.Y) + 90;
         rotationx.text = "rotation x = " + X + "°";
         rotationy.text = "rotation y = " + Y + "°";
     }
@@ -112,9 +112,27 @@ public class FIRE_hud : MonoBehaviour
 
     #region Shoot
 
+    public GameObject marble;
+    public Camera cam;
+    public Transform shootPoint;
+    bool canFire = true;
+
     private void Shoot()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Mouse1) && canFire)
+        {
+            canFire = false;
+            Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+            Vector3 direction = ray.GetPoint(75) - shootPoint.position;
+            GameObject currentMarble = Instantiate(marble, shootPoint.position, Quaternion.identity);
+            currentMarble.GetComponent<Rigidbody>().AddForce(direction.normalized * power * 7, ForceMode.Impulse);
+            Invoke("Wait", 2f);
+        }
+    }
+
+    void Wait()
+    {
+        canFire = true;
     }
 
     #endregion Shoot
