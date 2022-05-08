@@ -3,8 +3,14 @@ using UnityEngine.UI;
 
 public class FIRE_hud : MonoBehaviour
 {
-    int mode = 1;
-    float power = 3.8f;
+    public static int mode;
+    public static float power;
+
+    private void Start()
+    {
+        mode = 1;
+        power = 3.8f;
+    }
 
     private void Update()
     {
@@ -104,8 +110,8 @@ public class FIRE_hud : MonoBehaviour
         //direction
         int X = -Mathf.RoundToInt(_Camera.X);
         int Y = Mathf.RoundToInt(_Camera.Y) + 90;
-        rotationx.text = "rotation x = " + X + "°";
-        rotationy.text = "rotation y = " + Y + "°";
+        rotationx.text = "rotation y = " + X + "°";
+        rotationy.text = "rotation x = " + Y + "°";
     }
 
     #endregion HUD

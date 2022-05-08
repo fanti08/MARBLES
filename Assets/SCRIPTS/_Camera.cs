@@ -13,11 +13,11 @@ public class _Camera : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.UpArrow) && X > -60) X-= .02f;
-        if (Input.GetKey(KeyCode.DownArrow) && X < 0) X += .02f;
+        if (Input.GetKeyDown(KeyCode.UpArrow) && X > -60) X-= 1;
+        if (Input.GetKeyDown(KeyCode.DownArrow) && X < 0) X += 1;
 
-        if (Input.GetKey(KeyCode.RightArrow) && Y < -55) Y += .02f;
-        if (Input.GetKey(KeyCode.LeftArrow) && Y > -125) Y -= .02f;
+        if (Input.GetKeyDown(KeyCode.RightArrow) && Y < -55) Y += 1;
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && Y > -125) Y -= 1;
 
         transform.localRotation = Quaternion.Euler(X, Y, 0);
     }
