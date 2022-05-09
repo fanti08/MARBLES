@@ -24,4 +24,17 @@ public class targets : MonoBehaviour
             transform.position = new Vector3(Random.Range(42.25f, 47.75f), 1.6f, Random.Range(12.25f, 17.75f));
         }
     }
+
+    private void Update()
+    {
+        if (transform.position.y < 0)
+        {
+            captured = PlayerPrefs.GetInt("captured");
+            captured++;
+            PlayerPrefs.SetInt("captured", captured);
+            if (captured == 5) SceneManager.LoadScene("boh");
+            txt_captured.text = "CAPTURED: " + captured.ToString() + "/5";
+            transform.position = new Vector3(Random.Range(42.25f, 47.75f), 1.6f, Random.Range(12.25f, 17.75f));
+        }
+    }
 }

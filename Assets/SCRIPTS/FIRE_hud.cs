@@ -125,11 +125,14 @@ public class FIRE_hud : MonoBehaviour
 
     private void Shoot()
     {
+        Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+        Vector3 direction = ray.GetPoint(75) - shootPoint.position;
+
         if (Input.GetKeyDown(KeyCode.Mouse1) && canFire)
         {
+            if (mode == 1) GameObject.Find("basic").GetComponent<AudioSource>().Play();
+
             canFire = false;
-            Ray ray = cam.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-            Vector3 direction = ray.GetPoint(75) - shootPoint.position;
             GameObject currentMarble = Instantiate(marble, shootPoint.position, Quaternion.identity);
             currentMarble.GetComponent<Rigidbody>().AddForce(direction.normalized * power * 7, ForceMode.Impulse);
             Invoke("Wait", 2f);

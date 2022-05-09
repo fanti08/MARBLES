@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class marbles : MonoBehaviour
@@ -7,8 +6,6 @@ public class marbles : MonoBehaviour
     {
         _Destroy();
     }
-
-    #region DESTROY
 
     public Rigidbody rb;
 
@@ -38,6 +35,4 @@ public class marbles : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
-    #endregion DESTROY
 }
