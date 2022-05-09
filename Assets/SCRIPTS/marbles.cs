@@ -22,8 +22,7 @@ public class marbles : MonoBehaviour
 
     void DestroyIfStationary()
     {
-        if (Mathf.Abs(rb.velocity.x) <= .1f && Mathf.Abs(rb.velocity.y) <= .1f && Mathf.Abs(rb.velocity.z) <= .1f && transform.position.x < 44)
-            Invoke("des", 10);
+        if (Mathf.Abs(rb.velocity.x) <= .1f && Mathf.Abs(rb.velocity.y) <= .1f && Mathf.Abs(rb.velocity.z) <= .1f && transform.position.x < 44) Invoke("des", 10);
     }
 
     private void OnCollisionEnter(Collision collision)
